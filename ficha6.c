@@ -112,13 +112,6 @@ typedef struct dinStack {
     int *values;
 } *DStack;
 
-typedef struct dinQueue {
-    int size;
-    int front;
-    int length;
-    int *values;
-} *DQueue;
-
 void dshow(DStack d) {
 
     if (d->sp != -1) {
@@ -133,7 +126,6 @@ void dinitStack(DStack d)
     d->size = 2;
     d->values = malloc(d->size * sizeof(int));
     d->sp = -1;
-
 }
 
 
@@ -150,37 +142,93 @@ void dpush(DStack d, int x)
 {
     if (d->sp == d->size) {
         d->size = d->size * 2;
-        d->values = malloc(d->size * sizeof(int));
+        d->values = realloc(d->values, d->size * sizeof(int));
     }
         
     d->sp++;
     d->values[d->sp] = x;
 }
 
-/*
-int dpop(SStack s, int *x)
-{
 
-    if (SisEmpty(s) == 0)0
+int dpop(DStack d, int *x)
+{
+    if (disEmpty(d) == 0)
         return 1;
 
-    *x = s->values[s->sp];
-    s->sp--;
+    *x = d->values[d->sp];
+    d->sp--;
 
     return 0;
 }
 
-int dtop(SStack s, int *x)
+int dtop(DStack d, int *x)
 {
 
-    if (SisEmpty(s) == 0)
+    if (disEmpty(d) == 0)
         return 1;
 
-    *x = s->values[s->sp];
+    *x = d->values[d->sp];
 
     return 0;
 }
-*/
+
+typedef struct dinQueue {
+    int size;
+    int front;
+    int length;
+    int *values;
+} *DQueue;
+
+void qshow(DQueue q) {
+    for (int i = 0; i < q->length; i++) {
+        printf("q->values[%d]: %d\n", i, q->values[i]);
+    }
+}  
+
+void DinitQueue (DQueue q) {
+    q->size = 2;
+    q->front = 0;
+    q->length = 0;
+    q->values = malloc(q->size * sizeof(int));
+}
+
+int DisEmptyQ (DQueue q) {
+    if (q->length == 0)
+        return 0;
+
+    return 1;
+}
+
+void Denqueue (DQueue q, int x) {
+    if (q->length == q->size) {
+        q->size = q->size * 2;
+        //q->values = malloc(q->size * sizeof(int)); //malloc clears queue, lets use realoc
+        q->values = realloc(q->values, q->size * sizeof(int));
+    }
+
+    q->values[q->length] = x;
+    q->length++;
+}
+
+int Ddequeue (DQueue q, int *x) {
+    if (DisEmptyQ(q) == 0)
+        return 1;
+
+    *x = q->values[q->front];
+    q->front++;
+    q->length--;
+
+    return 0;
+}
+
+int Dfront (DQueue q, int *x) {
+    if (DisEmptyQ(q) == 0)
+        return 1;
+
+    *x = q->values[q->front];
+
+    return 0;
+}
 
 int main(int argc, char *argv[])
 {
@@ -217,18 +265,40 @@ int main(int argc, char *argv[])
     printf("k: %d\n", k);
     printf("h: %d\n", h);
     printf("l: %d\n", l);
-    */
 
+    
     struct dinStack d;
     dinitStack(&d);
 
     dpush(&d, 4);
     dpush(&d, 8);
-
+    dpush(&d, 10);
+    dpush(&d, 12);
+    int a;
+    dtop(&d, &a);
+    printf("a: %d\n", a);
     dshow(&d);
+    free(d.values);
+
+    */
+
+    //DQueue q;
+    struct dinQueue q;
+    DinitQueue(&q);
+
+    int k;
+    int l;
+    int h;
     
-    //printf("%d", disEmpty(&d));
-
-
+    Denqueue(&q, 6);
+    Denqueue(&q, 8);
+    Denqueue(&q, 10);
+    Denqueue(&q, 12);
+    qshow(&q);
+    Ddequeue(&q, &k);
+    Ddequeue(&q, &h);
+    Dfront(&q, &l);
+    
+    free(q.values);
     return 0;
 }
