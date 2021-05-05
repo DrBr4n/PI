@@ -112,7 +112,7 @@ int main(int argc, char * argv[]) {
                        ,{5555, "Diogo", {2,2,1,1,1,0},  8.5}
                        };
 
-    //printf("idx: %d\n", procuraNum(atoi(argv[1]), Turma1, 7));
+    printf("idx: %d\n", procuraNum(atoi(argv[1]), Turma1, 7));
 
     //ordenaPorNum(Turma1, 7);
 
@@ -121,7 +121,7 @@ int main(int argc, char * argv[]) {
 
     int ind[7] = {3,1,0,6,5,4,2};
 
-    imprimeTurma(ind,Turma1, 7);
+    //imprimeTurma(ind,Turma1, 7);
 
     return 0;
 }
