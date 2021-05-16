@@ -69,13 +69,16 @@ int qDig(unsigned int n) {
 char * strcats(char s1[], char s2[]) {
 
     char * res = s1;
+    int i,j;
+    for (i = 0; s1[i] != '\0'; i++) res++;
 
-    for (int i = 0; s1[i] != '\0'; i++) res++;
-
-    for (int i = 0; s2[i] != '\0'; i++) {
-        *res = s2[i];
+    for (j = 0; s2[j] != '\0'; j++) {
+        *res = s2[j];
         res++;
     }
+    
+    
+    *res = '\0';
     
     return res;
 }
@@ -94,6 +97,45 @@ char * strcats(char s1[], char s2[]) {
 //    
 //    return result;
 //}
+int iguaisConsecutivos (char s[]) {
+    
+    int max = 0;
+    int counter = 1;
+    int i;
+
+    for (i = 0; s[i] != '\0'; i++) {
+        if (s[i] == s[i+1]) counter++;
+        else counter = 1;
+        if (counter > max) max = counter;
+    }
+    return max;
+}
+
+int elem(char c, char * s) {
+    int i;
+    for(i = 0; s[i] != '\0'; i++) {
+        if (c == s[i]) return 1;
+    }
+    return 0;
+}
+
+int difConsecutivos(char s[]) {
+    int max = 0;
+    int counter = 1;
+    int i;
+    char * aux = malloc(20 * sizeof(char));
+
+    for (i = 0; s[i] != '\0'; i++) {
+        *aux = s[i];
+        aux++;
+        if (s[i] != s[i+1] && s[i] != ' ' && s[i+1] != ' ') counter++;
+        else if (s[i] != ' ' && s[i+1] != ' ') counter = 1;
+        if (counter > max) max = counter;
+    }
+    return max;
+}
+
+
 
 int main(int argc, char * argv[]) {
 
@@ -101,8 +143,8 @@ int main(int argc, char * argv[]) {
     //strcpys(s, "ola");
     //printf("%s", s);
 
-    char * s = strcats("Ola", "tudo bem");
-    printf("%s", s);
+    char * s = "mundo cruel!!!";
+    printf("iguaisConsecutivos: %d\n", iguaisConsecutivos(s));
 
     return 0;
 }
