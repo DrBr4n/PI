@@ -199,33 +199,70 @@ int maxCresc (int v[], int N){
 }
 
 //33
-//procura a em v de tamanho N
-int elem(int v[], int N, int a) {
-    int i;
-    for (i = 0; i < N; i++) {
-        if (v[i] == a) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
 int elimRep (int v[], int N) {
-    int r = 0;
     int i = 0;
 
-    for (i = 0; i < N; i++) {
-        if(elem(v, i, v[i])) {
-            r++;
+    while (i < N) {
+        int j;
+        int rep = 0;
+        for (j = 0; j < i; j++) {
+            if (v[j] == v[i]) {
+                rep = 1;
+                break;
+            }            
+        }
+        if (rep) {
+            int k;
+            for (k = i; k < N; k++) v[k] = v[k + 1];
+            N--;
+        }
+        else i++;
+    }
+    return N;
+}
+
+//34
+int elimRepOrd (int v[], int N) {
+    int i;
+
+    for (i = 0; i < N - 1; i++) {
+        if (v[i] == v[i + 1]) {
             int j;
-            for(j = i; j < N; j++) v[j] = v[j + 1];
+            for (j = i; j < N; j++) {
+                v[j] = v[j + 1];
+            }
+            N--;
+            i--;
+        }
+    }
+    return N;
+}
+
+//35
+int comunsOrd (int a[], int na, int b[], int nb){
+    int r = 0;
+    if (na >= nb) {
+        int n = na;
+        int z = nb;
+    } else {
+        int n = nb;
+        int z = na;
+    } 
+
+    int c = 0;
+    int i = 0;
+    for (i = 0; i < n; i++) {
+        if (a[i] == b[c]) {
+            r++;
+            c++;
+        }
+        else if(a[i] > b[c]) {
+            c++;
             i--;
         }
     }
     return r;
 }
-
-
 
 int main(int argc, char * argv[]) {
 
