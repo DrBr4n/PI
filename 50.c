@@ -42,6 +42,7 @@ void three() {
     printf("Segundo max: %d\n", sndMax);
 }
 
+//4
 int bitsUm(unsigned int n) {
     int r = 0;
     while (n) {
@@ -51,12 +52,13 @@ int bitsUm(unsigned int n) {
     return r;
 }
 
-int trailingZ (unsigned int n) {
+//5
+//int trailingZ (unsigned int n) {
+//    if(n % 2) return 0;
+//    else return 1 + trailingZ(n >> 1);
+//}
 
-    if (n % 2) return 0;
-    else return 1 + trailingZ(n/2);
-}
-
+//6
 int qDig(unsigned int n) {
     int r = 1;
     while (n > 9) {
@@ -66,6 +68,7 @@ int qDig(unsigned int n) {
     return r;
 }
 
+//7
 char * strcats(char s1[], char s2[]) {
 
     char * res = s1;
@@ -82,8 +85,14 @@ char * strcats(char s1[], char s2[]) {
     
     return res;
 }
-
-
+int difConsecutivos(char s[]) {
+    int max = 0;
+    int counter = 1;
+    int i;
++
+    return max;
+}
+//8
 //char * strcpys(char * dest, char source[]) {
 //
 //    char * result = source;
@@ -97,6 +106,8 @@ char * strcats(char s1[], char s2[]) {
 //    
 //    return result;
 //}
+
+//15
 int iguaisConsecutivos (char s[]) {
     
     int max = 0;
@@ -111,28 +122,107 @@ int iguaisConsecutivos (char s[]) {
     return max;
 }
 
-int elem(char c, char * s) {
+int elemStr(char * s, int i, int n) {
+    int r = 0;
+    for(; i < n; i++) {
+        if (s[i] == s[n]) return 1;
+    }
+    return r;
+}
+
+//16
+int difConsecutivos(char s[]) {
+    int max = 0;
+    int i, j;
+
+    for (i = 0; s[i] != '\0'; i++) {
+        int counter = 0;
+        for (j = i; s[j] != '\0'; j++) {
+            if (!elemStr(s, i, j)) counter++;
+            else break;
+        }
+        if (counter > max) max = counter;
+    }
+    return max;  
+}
+
+//30
+int menosFreq (int v[], int N){
+    int r = v[0];
+    int i = 0;
+    int counter = 1;
+    int menos = 50;
+
+    for (i = 0; i < N; i++) {
+        if (v[i] == v[i+1]) counter++;
+        else {
+            if (counter < menos) {
+              menos = counter;
+              r = v[i];
+            } 
+            counter = 1;
+        }   
+    }
+    return r;
+}
+
+//31
+int maisFreq (int v[], int N){
+    int r = 0;
+    int i = 0;
+    int counter = 1;
+
+    for (i = 0; i < N; i++) {
+        if (v[i] < v[i+1]) counter++;
+        else {
+            if (counter > r) r = counter;
+            counter = 1;
+        }   
+    }
+    return r;
+}
+
+//32
+int maxCresc (int v[], int N){
+    int r = 0;
+    int i = 0;
+    int counter = 1;
+
+    for (i = 0; i < N; i++) {
+        if (v[i] <= v[i+1]) counter++;
+        else {
+            if (counter > r) r = counter;
+            counter = 1;
+        }   
+    }
+    return r;
+}
+
+//33
+//procura a em v de tamanho N
+int elem(int v[], int N, int a) {
     int i;
-    for(i = 0; s[i] != '\0'; i++) {
-        if (c == s[i]) return 1;
+    for (i = 0; i < N; i++) {
+        if (v[i] == a) {
+            return 1;
+        }
     }
     return 0;
 }
 
-int difConsecutivos(char s[]) {
-    int max = 0;
-    int counter = 1;
-    int i;
-    char * aux = malloc(20 * sizeof(char));
+int elimRep (int v[], int N) {
+    int r = 0;
+    int i = 0;
 
-    for (i = 0; s[i] != '\0'; i++) {
-        *aux = s[i];
-        aux++;
-        if (s[i] != s[i+1] && s[i] != ' ' && s[i+1] != ' ') counter++;
-        else if (s[i] != ' ' && s[i+1] != ' ') counter = 1;
-        if (counter > max) max = counter;
+    for (i = 0; i < N; i++) {
+        if(elem(v, i, v[i])) {
+            r++;
+            int j;
+            for(j = i; j < N; j++) v[j] = v[j + 1];
+            i--;
+        }
     }
-    return max;
+    return r;
 }
 
 
@@ -143,8 +233,11 @@ int main(int argc, char * argv[]) {
     //strcpys(s, "ola");
     //printf("%s", s);
 
-    char * s = "mundo cruel!!!";
-    printf("iguaisConsecutivos: %d\n", iguaisConsecutivos(s));
+    //char * s = "mundo cruel!!!";
+    //printf("iguaisConsecutivos: %d\n", iguaisConsecutivos(s));
+
+    printf("trailingZ: %d\n", trailingZ(78791));
+
 
     return 0;
 }
