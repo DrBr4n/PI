@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//1
 void one() {
 
     int max = -1;
@@ -13,6 +14,7 @@ void one() {
     printf("Max: %d\n", max);
 }
 
+//2
 void two() {
     int sum = 0;
     int len = 0;
@@ -26,6 +28,7 @@ void two() {
     printf("Média: %d\n", sum / (len - 1));
 }
 
+//3
 void three() {
 
     int max = -1;
@@ -85,13 +88,7 @@ char * strcats(char s1[], char s2[]) {
     
     return res;
 }
-int difConsecutivos(char s[]) {
-    int max = 0;
-    int counter = 1;
-    int i;
-+
-    return max;
-}
+
 //8
 //char * strcpys(char * dest, char source[]) {
 //
@@ -106,6 +103,31 @@ int difConsecutivos(char s[]) {
 //    
 //    return result;
 //}
+
+
+//14
+char charMaisfreq (char s[]) {
+
+    if (s == "") return 0;
+
+    char r = '?';
+    int max = 0;
+    int c = 0;
+
+    int i, j;
+    for (i = 0; s[i]; i++) {
+        for (j = 0; s[j]; j++) {
+            if (s[j] == s[i])
+              c++;
+        }
+        if (c > max) {
+            max = c;
+            r = s[i];
+        }
+        c = 0;
+    }
+    return r;
+}
 
 //15
 int iguaisConsecutivos (char s[]) {
@@ -122,6 +144,7 @@ int iguaisConsecutivos (char s[]) {
     return max;
 }
 
+//16
 int elemStr(char * s, int i, int n) {
     int r = 0;
     for(; i < n; i++) {
@@ -130,7 +153,6 @@ int elemStr(char * s, int i, int n) {
     return r;
 }
 
-//16
 int difConsecutivos(char s[]) {
     int max = 0;
     int i, j;
@@ -144,6 +166,168 @@ int difConsecutivos(char s[]) {
         if (counter > max) max = counter;
     }
     return max;  
+}
+
+//20
+int contaPal (char s[]) {
+    int r = 0;
+    int inword = 0;
+    int i;
+    for (i = 0; s[i]; i++) {
+        if(s[i] == ' ' || s[i] == '\n') {
+            if (inword) r++;
+            inword = 0;
+        }
+        else
+            inword = 1;
+    }
+    if (inword) r++;
+
+    return r;
+}
+
+//21
+int contaVogais (char s[]) {
+    int r = 0;
+    int i;
+    for (i = 0; s[i]; i++) {
+        if (s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U' || s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u')
+            r++;
+    }
+    
+    return r;
+}
+
+//22
+int contida (char a[], char b[]) {
+    
+    int i, j, k;
+    for (i = 0; a[i]; i++) {
+        k = 0;
+        for (j = 0; b[j]; j++) {
+            if (a[i] == b[j]) k = 1; 
+        }
+        if (k == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+//23
+int palindroma (char s[]) {
+    
+    int r = 1;
+    int len = 0;
+    int i = 0;
+
+    for (; s[i]; i++) len++;
+
+    int m = len/2;
+    for (i = 0; i < m; i++) {
+        if (s[i] != s[len-1]) {
+            r = 0;
+            break;
+        }
+        len--;
+    }
+    return r;
+}
+
+//24     
+int remRep (char texto []) {
+    int i, r = 0;
+    for (i = 0; texto[i]; i++) {
+        r++;
+        if (texto[i] == texto[i + 1]) {
+            int k;
+            for (k = i; texto[k]; k++) {
+                texto[k] = texto[k + 1];
+            }
+            i--;
+            r--;
+        }
+    }
+    return r;
+}
+
+//25
+int limpaEspacos (char texto[]) {
+    int i, r = 0;
+    for (i = 0; texto[i]; i++) {
+        r++;
+        if (texto[i] == ' ' && texto[i + 1] == ' ') {
+            int k;
+            for (k = i; texto[k]; k++) {
+                texto[k] = texto[k + 1];
+            }
+            i--;
+            r--;
+        }
+    }
+    return r;
+}
+
+//26
+void insere (int s[], int N, int x){
+    int i;
+    for (i = 0; i < N; i++) {
+        if (s[0] > x) {
+            int k;
+            for (k = N; k >= i; k--) {
+                s[k]= s[k - 1];
+            }
+            s[i] = x;
+            break;
+        }
+        else if (s[N-1] < x) {
+            s[N] = x;
+        }
+        else if (s[i] <= x && s[i + 1] > x) {
+            int k;
+            for (k = N; k > i; k--) {
+                s[k]= s[k - 1];
+            }
+            s[i + 1] = x;
+            break;
+        } 
+    }
+}
+
+//27
+void merge (int r [], int a[], int b[], int na, int nb){
+
+    int i;
+    int ca = 0;
+    int cb = 0;
+    for (i = 0; i < na+nb; i++) {
+        if (a[ca] <= b[cb] && ca < na || cb >= nb) r[i] = a[ca++];
+        else r[i] = b[cb++];
+    }
+}
+
+//28
+int crescente (int a[], int i, int j){
+    int r = 1;
+    
+    for (; i < j; i++) if (a[i] > a[i + 1]) r = 0;
+
+    return r;
+}
+
+//29
+int retiraNeg (int v[], int N){
+
+    int i;
+    for (i = 0; i < N; i++) {
+        if (v[i] < 0) {
+            int k;
+            for (k = i--; k < N; k++) v[k] = v[k + 1];
+            N--;
+        }
+    }
+
+    return r;
 }
 
 //30
@@ -241,28 +425,101 @@ int elimRepOrd (int v[], int N) {
 //35
 int comunsOrd (int a[], int na, int b[], int nb){
     int r = 0;
-    if (na >= nb) {
-        int n = na;
-        int z = nb;
-    } else {
-        int n = nb;
-        int z = na;
-    } 
 
-    int c = 0;
-    int i = 0;
-    for (i = 0; i < n; i++) {
-        if (a[i] == b[c]) {
+    int ca = 0;
+    int cb = 0;
+    while (ca < na && cb < nb) {
+        if (a[ca] == b[cb]) {
             r++;
-            c++;
+            ca++;
+            cb++;
         }
-        else if(a[i] > b[c]) {
-            c++;
-            i--;
+        else if(a[ca] > b[cb]) cb++;
+        else ca++;
+    }
+    return r;
+}
+
+//36
+int comuns (int a[], int na, int b[], int nb){
+    int r = 0;
+    
+    int i, j;
+    for (i = 0; i < na; i++) {
+        for (j = 0; j < nb; j++) {
+            if (a[i] == b[j]) {
+                r++;
+                break;
+            }
         }
     }
     return r;
 }
+
+//37
+int minInd (int v[], int n) {
+    int r = 0;
+    int i;
+    for (i = 1; i < n; i++) 
+        if (v[i] < v[r]) 
+            r = i;
+    return r;
+}
+
+//38
+void somasAc (int v[], int Ac [], int N){
+
+    int i;
+    int acum = 0;
+    for (i = 0; i < N; i++) {
+        acum += v[i]; 
+        Ac[i] = acum;
+    }
+}
+
+//39
+int triSup (int N, int m [N][N]) {
+    int r = 1;
+    int row, col;
+    for (row = 1; row < N; row++) {
+        for (col = 0; col < row; col++) {
+            if (m[row][col] != 0) 
+                return 0;
+        }
+    }
+    return r;
+}
+
+//40
+void transposta (int N, float m [N][N]) {
+    int row, col;
+
+    for (row = 0; row < N; row++) {
+        for (col = 0; col < row; col++) {
+            if (row != col) {
+                float tmp = m[row][col];
+                m[row][col] = m[col][row];
+                m[col][row] = tmp;
+            }
+        }
+    }
+}
+
+//41
+void addTo(int N, int M, int a [N][M], int b[N][M]) {
+    
+    int row, col;
+
+    for (row = 0; row < N; row++) {
+        for (col = 0; col < M; col++) {
+            a[row][col] = a[row][col] + b[row][col];
+        }
+    }
+}
+
+
+
+
 
 int main(int argc, char * argv[]) {
 
