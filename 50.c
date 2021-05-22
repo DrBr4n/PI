@@ -577,10 +577,6 @@ void addTo(int N, int M, int a [N][M], int b[N][M]) {
     }
 }
 
-
-
-
-
 int main(int argc, char * argv[]) {
 
     //char * s;
