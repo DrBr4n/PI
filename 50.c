@@ -105,6 +105,20 @@ char * strcats(char s1[], char s2[]) {
 //}
 
 
+//12
+void strnoV (char t[]){
+    int i;
+    for (i = 0; t[i]; i++) {
+        if (t[i] == 'A' || t[i] == 'E' || t[i] == 'I' || t[i] == 'O' || t[i] == 'U' || t[i] == 'a' || t[i] == 'e' || t[i] == 'i' || t[i] == 'o' || t[i] == 'u' ) {
+            int k;
+            for (k = i; t[k]; k++) {
+                t[k] = t[k + 1];
+            }
+            i--;
+        }
+    }
+}
+
 //14
 char charMaisfreq (char s[]) {
 
@@ -166,6 +180,52 @@ int difConsecutivos(char s[]) {
         if (counter > max) max = counter;
     }
     return max;  
+}
+
+//17
+int maiorPrefixo (char s1 [], char s2 []) {
+    
+    int i;
+    int c = 0;
+    for (i = 0; s1[i]; i++) {
+        if (s1[i] == s2[i]) {
+            c++;
+        }
+        else break;
+    }
+    return c;
+}
+
+//18
+int maiorSufixo (char s1 [], char s2 []) {
+    int lens1 = 0;
+    int lens2 = 0;
+    int c = 0;
+
+    while (s1[lens1++]);
+    while (s2[lens2++]);
+
+    lens1-= 2, lens2-= 2;
+
+    while (s1[lens1--] == s2[lens2--]) c++;
+
+    return c;
+}
+
+//19
+int sufPref (char s1[], char s2[]) {
+
+    int i;
+    int c = 0;
+    int j = 0;
+    for (i = 0; s1[i] != '\0'; i++) {
+        if (s1[i] == s2[j++]) c++;
+        else {
+            j = 0;
+            c = 0;
+        }
+    }
+    return c;
 }
 
 //20
